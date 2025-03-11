@@ -3,45 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VENDER</title>
+    <title>🍧 Vender Producto</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            background-color: #f9f9f9;
             text-align: center;
+            margin: 0;
+            padding: 20px;
         }
+
+        form {
+            background-color: white;
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .message {
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+
+        .error {
+            background-color: #ffdddd;
+            color: #d8000c;
+            border: 1px solid #d8000c;
+        }
+
+        .success {
+            background-color: #ddffdd;
+            color: #4F8A10;
+            border: 1px solid #4F8A10;
+        }
+
         table {
             width: 80%;
             margin: auto;
             border-collapse: collapse;
             margin-bottom: 20px;
         }
+
         th, td {
             border: 1px solid black;
             padding: 10px;
-            text-align: left;
+            text-align: center;
         }
+
         th {
             background-color: #f2f2f2;
         }
-        a {
-            display: block;
-            margin: 10px 0;
-            font-size: 18px;
-            text-decoration: none;
-            color: blue;
+
+        h1 {
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
 
-    <h1>🍧 VENDER 🍧</h1>
+    <h1>🍧 Vender Producto</h1>
 
+    <!-- Formulario para vender -->
+    <form action="/vender" method="GET">
+        <label for="producto">Selecciona un producto:</label>
+        <select name="tipo_producto">
+            {% if productos %}
+                {% for producto in productos %}
+                    <option value="{{ producto.tipo_producto }}">{{ producto.tipo_producto }}</option>
+                {% endfor %}
+            {% else %}
+                <option disabled>No hay productos disponibles</option>
+            {% endif %}
+        </select>
+        <button type="submit">Vender</button>
+    </form>
+
+    <!-- Mensajes de éxito o error -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p class="message {% if category == 'error' %} error {% else %} success {% endif %}">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Tabla de productos -->
+    <h1>📑 Productos Disponibles</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Ingrediente 1</th>
+                <th>Ingrediente 2</th>
+                <th>Ingrediente 3</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.productoID }}</td>
+                <td>{{ producto.tipo_producto }}</td>
+                <td>{{ producto.ingrediente1 }}</td>
+                <td>{{ producto.ingrediente2 }}</td>
+                <td>{{ producto.ingrediente3 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Tabla de ingredientes -->
+    <h1>🥄 Ingredientes Disponibles</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Calorías</th>
+                <th>Vegetariano</th>
+                <th>Tipo</th>
+                <th>Inventario</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ingrediente in ingredientes %}
+            <tr>
+                <td>{{ ingrediente.ingredienteID }}</td>
+                <td>{{ ingrediente.nombre }}</td>
+                <td>{{ ingrediente.precio }}</td>
+                <td>{{ ingrediente.calorias }}</td>
+                <td>{{ ingrediente.vegetariano }}</td>
+                <td>{{ ingrediente.tipo }}</td>
+                <td>{{ ingrediente.inventario }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Navegación -->
     <h2>📌 Navegación</h2>
     <p><a href="/">🚀 Index</a></p>
-    <p><a href="/vender">🤗 Vender</a></p> 
+    <p><a href="/vender">🤗 Vender</a></p>
     <p><a href="/productos">📑 Ver lista de productos</a></p>
-    <p><a href="/ingredientes">📝 Ver lista de ingredientes</a></p>   
+    <p><a href="/ingredientes">📝 Ver lista de ingredientes</a></p>
 
 </body>
 </html>
