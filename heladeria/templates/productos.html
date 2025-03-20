@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRODUCTOS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <h1> TABLA DE PRODUCTOS</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Precio del producto</th>
+                <th>Total Calorías</th>
+                
+                {% if current_user.is_admin or current_user.empleado %}
+                    <th>Ingrediente 1</th>
+                    <th>Nombre Ingrediente 1</th>
+                    <th>Calorías 1</th>
+                    <th>Precio 1</th>
+                    <th>Ingrediente 2</th>
+                    <th>Nombre Ingrediente 2</th>
+                    <th>Calorías 2</th>
+                    <th>Precio 2</th>
+                    <th>Ingrediente 3</th>
+                    <th>Nombre Ingrediente 3</th>
+                    <th>Calorías 3</th>
+                    <th>Precio 3</th>
+                {% endif %}
+                
+                {% if current_user.is_admin %}
+                    <th>Costo del producto</th>
+                    <th>Rentabilidad producto</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.productoID }}</td>
+                <td>{{ producto.tipo_producto }}</td>
+                <td>{{ producto.precio_producto }}</td>
+                <td>{{ producto.total_calorias }}</td>
+                
+                {% if current_user.is_admin or current_user.empleado %}
+                    {% for i in [1, 2, 3] %}
+                        <td>{{ producto['ingrediente' ~ i] }}</td>
+                        <td>
+                            {% for ingrediente in ingredientes %}
+                                {% if producto['ingrediente' ~ i] == ingrediente.ingredienteID %}
+                                    {{ ingrediente.nombre }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for ingrediente in ingredientes %}
+                                {% if producto['ingrediente' ~ i] == ingrediente.ingredienteID %}
+                                    {{ ingrediente.calorias }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {% for ingrediente in ingredientes %}
+                                {% if producto['ingrediente' ~ i] == ingrediente.ingredienteID %}
+                                    {{ ingrediente.precio }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    {% endfor %}
+                {% endif %}
+                
+                {% if current_user.is_admin %}
+                    <td>{{ producto.total_precio }}</td>
+                    <td>{{ producto.rentabilidad }}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>📌 Navegación</h2>
+    <p><a href="/auth/profile">Datos del Usuario</a></p>
+    <p><a href="/dashboard">🚀 Index</a></p>
+    <p><a href="/vender">🤗 Vender</a></p> 
+    <p><a href="/productos">📑 Ver lista de productos</a></p>
+    <p><a href="/ingredientes">📝 Ver lista de ingredientes</a></p>
+    <p><a href="/abastecer">🛒 Abastecer ingredientes</a></p>
+    <p><a href="/dashboard_admin"> Admin</a></p>
+    <p><a href="/logout">Cerrar sesión</a></p>
+
+</body>
+</html>

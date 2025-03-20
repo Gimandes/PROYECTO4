@@ -9,3 +9,4 @@ class Ingrediente(db.Model):
     vegetariano = db.Column(db.String(50), nullable=False)
     tipo = db.Column(db.String(50), nullable=False)
     inventario = db.Column(db.Integer, nullable=False)
+    es_saludable=db.Column(db.String, nullable=False)

@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import MagicMock
 from sqlalchemy.orm import Session
 from models.ingrediente import Ingrediente
-from controllers.heladeria import es_sano, abastecer_ingrediente
+from heladeria.controllers.saludable import es_sano, abastecer_ingrediente
 
 def test_es_sano():
     assert es_sano(50, False) == True  
