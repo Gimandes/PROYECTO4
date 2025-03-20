@@ -1,0 +1,5 @@
+"username";"password";"id";"is_admin";"email";"cliente";"empleado"
+"admin";"123";1;1;"username1@un.com";1;0
+"empleado";"123";2;0;"username2@un.com";0;1
+"cliente";"123";3;0;"username3@un.com";1;0
+"cualquiera";"123";4;0;"cualquiera@un.com";0;0

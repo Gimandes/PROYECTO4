@@ -1,0 +1,5 @@
+"productoID";"tipo_producto";"precio_producto";"ingrediente1";"ingrediente2";"ingrediente3";"nombre_ingrediente1";"nombre_ingrediente2";"nombre_ingrediente3";"calorias1";"calorias2";"calorias3";"total_calorias";"precio";"rentabilidad"
+1;"Malteada A";8000.0;1;5;10;"";"";"";0;0;0;520.0;0.0;7988.2
+2;"Copa A";9500.0;6;8;9;"";"";"";0;0;0;475.0;0.0;9492.3
+3;"Malteada B";8300.0;2;7;11;"";"";"";0;0;0;380.0;0.0;8288.8
+4;"Copa B";9200.0;4;5;12;"";"";"";0;0;0;560.5;0.0;9192.55
