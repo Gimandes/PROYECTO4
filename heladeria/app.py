@@ -1,17 +1,17 @@
 import time
 from flask import Flask, render_template, request,  redirect, url_for, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from config.config import Config
+from heladeria.config.config import Config
 from sqlalchemy.orm import sessionmaker
-from config.db import db
-from models.ingrediente import Ingrediente
-from models.producto import Producto
-from models.user import User
-from controllers.vender import vender_producto
-from controllers.saludable import es_sano
-from controllers.abastecer import abastecer
-from controllers.total_calorias import calcular_calorias
-from controllers.total_precio import calcular_precio, rentabilidad 
+from heladeria.config.db import db
+from heladeria.models.ingrediente import Ingrediente
+from heladeria.models.producto import Producto
+from heladeria.models.user import User
+from heladeria.controllers.vender import vender_producto
+from heladeria.controllers.saludable import es_sano
+from heladeria.controllers.abastecer import abastecer
+from heladeria.controllers.total_calorias import calcular_calorias
+from heladeria.controllers.total_precio import calcular_precio, rentabilidad 
 from flask_login import LoginManager, login_user, current_user, login_required, logout_user
 
 app = Flask(__name__, template_folder="templates")
