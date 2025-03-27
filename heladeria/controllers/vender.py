@@ -1,5 +1,5 @@
 from flask import request, redirect, url_for, flash
-from config.db import db
+from heladeria.config.db import db
 from heladeria.models.producto import Producto
 from heladeria.models.ingrediente import Ingrediente
 
