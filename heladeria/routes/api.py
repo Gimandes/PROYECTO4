@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
-from config.db import db
-from models.producto import Producto
-from models.ingrediente import Ingrediente
+from heladeria.config.db import db
+from heladeria.models.producto import Producto
+from heladeria.models.ingrediente import Ingrediente
 
 api = Blueprint('api', __name__)
 

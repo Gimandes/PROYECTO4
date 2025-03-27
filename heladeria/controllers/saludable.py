@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from models.ingrediente import Ingrediente
+from heladeria.models.ingrediente import Ingrediente
 
 def es_sano(session: Session):
     ingredientes = session.query(Ingrediente).all()

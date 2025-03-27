@@ -1,7 +1,7 @@
 from flask import request, redirect, url_for, flash
 from config.db import db
-from models.producto import Producto
-from models.ingrediente import Ingrediente
+from heladeria.models.producto import Producto
+from heladeria.models.ingrediente import Ingrediente
 
 def vender_producto():
     tipo_producto = request.args.get("tipo_producto")  # Obtener el producto seleccionado desde la URL

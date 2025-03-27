@@ -1,6 +1,6 @@
 from flask import request, render_template, redirect, url_for, flash
-from config.db import db
-from models.ingrediente import Ingrediente
+from heladeria.config.db import db
+from heladeria.models.ingrediente import Ingrediente
 
 def abastecer():
     print(request.args)

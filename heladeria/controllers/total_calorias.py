@@ -1,5 +1,5 @@
-from models.ingrediente import Ingrediente
-from models.producto import Producto
+from heladeria.models.ingrediente import Ingrediente
+from heladeria.models.producto import Producto
 from config.db import db
 
 def calcular_calorias():

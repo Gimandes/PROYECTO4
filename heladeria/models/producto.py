@@ -1,4 +1,4 @@
-from config.db import db
+from heladeria.config.db import db
 
 class Producto(db.Model):
     __tablename__ = "productos"
