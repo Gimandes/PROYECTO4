@@ -1,6 +1,6 @@
 from heladeria.models.ingrediente import Ingrediente
 from heladeria.models.producto import Producto
-from config.db import db
+from heladeria.config.db import db
 
 def calcular_calorias():
     productos = Producto.query.all()
