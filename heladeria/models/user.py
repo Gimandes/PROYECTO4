@@ -1,4 +1,3 @@
-from heladeria.app import app
 from heladeria.config.db import db
 from flask_login import UserMixin
 from sqlalchemy.orm import sessionmaker
@@ -17,15 +16,16 @@ class User(db.Model, UserMixin):
     cliente = db.Column(db.Boolean, nullable=False, default = False)
     empleado = db.Column(db.Boolean, nullable=False, default = False)
 
-
-with app.app_context():
-    if not session.query(User).first():
-        users = [
-            User(id=1, username="admin", password="123", is_admin=True, email="username1@un.com", cliente=True, empleado=True),
-            User(id=2, username="empleado", password="123", is_admin=False, email="username2@un.com", cliente=False, empleado=True),
-            User(id=3, username="cliente", password="123", is_admin=False, email="username3@un.com", cliente=True, empleado=False),
-            User(id=4, username="cualquiera", password="123", is_admin=False, email="cualquiera@un.com", cliente=False, empleado=False),
-        ]
-        
-        session.add_all(users)
-        session.commit()
+with db.engine.connect() as conn:
+    from heladeria.app import app
+    with app.app_context():
+        if not session.query(User).first():
+            users = [
+                User(id=1, username="admin", password="123", is_admin=True, email="username1@un.com", cliente=True, empleado=True),
+                User(id=2, username="empleado", password="123", is_admin=False, email="username2@un.com", cliente=False, empleado=True),
+                User(id=3, username="cliente", password="123", is_admin=False, email="username3@un.com", cliente=True, empleado=False),
+                User(id=4, username="cualquiera", password="123", is_admin=False, email="cualquiera@un.com", cliente=False, empleado=False),
+            ]
+            
+            session.add_all(users)
+            session.commit()
