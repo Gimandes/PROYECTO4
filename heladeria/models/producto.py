@@ -1,4 +1,9 @@
 from heladeria.config.db import db
+from sqlalchemy.orm import sessionmaker
+
+# Crear sesión
+Session = sessionmaker(bind=db.engine)
+session = Session()
 
 class Producto(db.Model):
     __tablename__ = "productos"
@@ -18,3 +23,14 @@ class Producto(db.Model):
     total_calorias = db.Column(db.Float, nullable=False)
     precio = db.Column(db.Float, nullable=False)
     rentabilidad = db.Column(db.Float, nullable=False)
+
+if not session.query(Producto).first():
+    productos = [
+        Producto(productoID=1, tipo_producto="Malteada A", precio=8000, ingrediente1=1, ingrediente2=5, ingrediente3=10, total_calorias=520, rentabilidad=7988.2),
+        Producto(productoID=2, tipo_producto="Copa A", precio=9500, ingrediente1=6, ingrediente2=8, ingrediente3=9, total_calorias=475, rentabilidad=9492.3),
+        Producto(productoID=3, tipo_producto="Malteada B", precio=8300, ingrediente1=2, ingrediente2=7, ingrediente3=11, total_calorias=380, rentabilidad=8288.8),
+        Producto(productoID=4, tipo_producto="Copa B", precio=9200, ingrediente1=4, ingrediente2=5, ingrediente3=12, total_calorias=560.5, rentabilidad=9192.55),
+    ]
+    
+    session.add_all(productos)
+    session.commit()
